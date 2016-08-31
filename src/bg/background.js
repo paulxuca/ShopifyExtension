@@ -4,10 +4,28 @@
 //     "sample_setting": "This is how you use Store.js to remember values"
 // });
 
+function getItemFromChromeStorage(key) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(key, function(data) {
+      resolve(data);
+    });
+  });
+}
+
+
+
 
 //example of using a message handler from the inject scripts
-chrome.extension.onMessage.addListener(
+chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  });
+    if (request.done && request.done === "yes") {
+      console.log('Gotime!');
+      localStorage.clear();
+      chrome.storage.local.get(null, function (data) { 
+        for(var key in data) {
+          localStorage.setItem(key, JSON.stringify(data[key]));
+        }
+        console.log(localStorage);
+      });
+    }
+});

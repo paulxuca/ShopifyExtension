@@ -23,15 +23,17 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
-    "*://*.myshopify.com/products.json*",
-    "*://*.myshopify.com/products.json*"
+    "*://*.myshopify.com/admin/products*",
+    "*://*.myshopify.com/products*",
+    "storage",
+    "tabs"
   ],
   "content_scripts": [
     {
       "matches": [
         "https://www.google.com/*",
-        "*://*.myshopify.com/products.json*",
-        "*://*.myshopify.com/products.json*"
+        "*://*.myshopify.com/admin/products*",
+        "*://*.myshopify.com/products*"
       ],
       "css": [
         "src/inject/inject.css"
@@ -40,8 +42,8 @@
     {
       "matches": [
         "https://www.google.com/*",
-        "*://*.myshopify.com/products.json*",
-        "*://*.myshopify.com/products.json*"
+        "*://*.myshopify.com/admin/products*",
+        "*://*.myshopify.com/products*"
       ],
       "js": [
         "src/inject/inject.js"
