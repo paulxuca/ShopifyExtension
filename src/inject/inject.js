@@ -3,11 +3,13 @@ function parseJSONData(data, storeName) {
 		var storedObject = {};
 		storedObject[storeName + '_' + each.id] = each;
 		chrome.storage.local.set(storedObject, function(){
-			console.log('Saved!');
+			
 		});
 		return each.id;
 	});
-	chrome.extension.sendMessage({done: "yes"});
+	chrome.storage.local.set({storeName: storeName}, function(){
+		chrome.extension.sendMessage({done: "yes"});
+	});	
 }
 
 chrome.extension.sendMessage({}, function(response) {

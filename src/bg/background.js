@@ -25,7 +25,6 @@ chrome.runtime.onMessage.addListener(
         for(var key in data) {
           localStorage.setItem(key, JSON.stringify(data[key]));
         }
-        console.log(localStorage);
       });
     }
 });
