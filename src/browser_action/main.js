@@ -45,7 +45,6 @@ function setUpTagsAndTypes() {
 		},
 		computed: {
 			filteredShopifyData: function() {
-				
 				if (this.currentSelectedTags.length !== 0 || this.currentSelectedTypes.length !== 0) {
 					return this.shopifyData.filter((each) => {
 						if (this.currentSelectedTypes.indexOf(each.product_type) !== -1) {

@@ -28,3 +28,13 @@ chrome.runtime.onMessage.addListener(
       });
     }
 });
+
+
+chrome.tabs.onUpdated.addListener(function(tabId, info, tab) {
+  chrome.browserAction.disable(tabId);
+    if (info.status === 'complete') {
+      if (tab.url.match(/(.+).myshopify.com\/admin/) || tab.url.match(/(.+).myshopify.com\//)) {
+        chrome.browserAction.enable(tabId);
+      }
+    }
+});
