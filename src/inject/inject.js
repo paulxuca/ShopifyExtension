@@ -2,13 +2,11 @@ function parseJSONData(data, storeName) {
 	var idList = data.map((each) => {
 		var storedObject = {};
 		storedObject[storeName + '_' + each.id] = each;
-		chrome.storage.local.set(storedObject, function(){
-			
-		});
+		chrome.storage.local.set(storedObject);
 		return each.id;
 	});
-	chrome.storage.local.set({storeName: storeName}, function(){
-		chrome.extension.sendMessage({done: "yes"});
+	chrome.storage.local.set({ storeName: storeName }, function(){
+		chrome.extension.sendMessage({ done: 'yes' });
 	});	
 }
 

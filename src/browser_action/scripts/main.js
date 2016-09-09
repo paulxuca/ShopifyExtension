@@ -1,8 +1,5 @@
 var getFilterFromEvent = (event) => event.target.innerHTML;
-function parseDollarValue(value){
-	return value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-}
-
+var parseDollarValue = (value) => value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 
 var backgroundPage = chrome.extension.getBackgroundPage();
 function initializeStore() {
@@ -12,7 +9,6 @@ function initializeStore() {
     setTimeout(initializeStore, 2000);
   }
 }
-
 
 function setUpTagsAndTypes() {
 	var data = [];
@@ -32,6 +28,8 @@ function setUpTagsAndTypes() {
 		}
 			return total;
 	}, []);
+
+	window.shopifyData = data.length;
 
 	new Vue({
 		el: '#app',
@@ -82,9 +80,10 @@ function setUpTagsAndTypes() {
 				return this.filteredShopifyData.length;
 			},
 			numberTypes: function () {
-				console.log(this.total);
-				console.log(this.numberVariants);
 				return Math.ceil(+this.total.replace(',', '') / this.numberVariants);
+			},
+			hasFilter: function() {
+				return this.currentSelectedTags.length || this.currentSelectedTypes.length;
 			}
 		},
 		methods: {
