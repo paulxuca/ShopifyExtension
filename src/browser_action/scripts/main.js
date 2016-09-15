@@ -38,6 +38,7 @@ function setUpTagsAndTypes() {
 			tags: tags,
 			types: types,
 			storeName: storeName,
+			calcTax: false,
 			tagFilter: '',
 			typeFilter: ''
 		},
@@ -65,7 +66,9 @@ function setUpTagsAndTypes() {
 			total: function() {
 				var value = this.filteredShopifyData.reduce((total, each) => {
 					for (let iterator = 0; iterator < each.variants.length; iterator++) {
-						total += Number(each.variants[iterator].price);
+						var totalWithoutTax = Number(each.variants[iterator].price);
+						var totalWithTax = (each.variants[iterator].taxable && (this.calcTax === true || this.calcTax === 'true')) ? totalWithoutTax*1.13 : totalWithoutTax
+						total += totalWithTax;
 					}
 					return total;
 				}, 0);

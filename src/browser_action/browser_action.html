@@ -12,7 +12,7 @@
 	</div>
 	<div id="hideOnNoData">
 		<h1 class="totalAmount"> <span>$</span>{{ total }} </h1>
-		<h6 class="totalHeader">Total value of products <span v-if="hasFilter">with applied filters</span> at <span class="emphasis">{{ storeName }}</span></h6>
+		<h6 class="totalHeader">Total value of products <span v-if="hasFilter">with applied filters</span> at <span class="emphasis">{{ storeName }}</span><span v-if="calcTax === true || calcTax === 'true'" > with taxes<span></h6>
 		<div class="statsContainer">
 			<div class="statsElement">
 				<h4>{{ numberVariants }}</h4>
@@ -66,6 +66,13 @@
 				</div>
 			</div>
 		</div>
+			<div class="taxSection">
+					<span style="font-weight: 600">Calculate with taxes?</span>
+					<label for="yesTax">Yes</label>
+					<input id="yesTax" value="true" v-model="calcTax" type="radio"/>
+					<label for="noTax">no</label>
+					<input id="noTax" value="false" v-model="calcTax" type="radio"/>
+			</div>
 	</div>
 </div>
 
